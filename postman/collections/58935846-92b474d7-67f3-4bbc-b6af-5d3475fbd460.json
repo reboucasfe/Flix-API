@@ -1,0 +1,31 @@
+{
+	"info": {
+		"_postman_id": "58935846-92b474d7-67f3-4bbc-b6af-5d3475fbd460",
+		"name": "Flix-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET: Genres List",
+			"id": "58935846-8ef005a3-0bb9-4846-acbd-86cc4e77c048",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/genres",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"genres"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
