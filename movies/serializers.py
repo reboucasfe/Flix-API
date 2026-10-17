@@ -2,13 +2,29 @@ from rest_framework import serializers
 from movies.models import Movie
 
 class MovieModelSerializer(serializers.ModelSerializer):
+    rate = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model  = Movie
         fields = '__all__'
 
+    def get_rate(self, obj):
+        reviews = obj.reviews.all()
+
+        if reviews:
+            sum_reviews = 0
+
+            for review in reviews:
+                sum_reviews += review.stars
+
+            reviews_count = reviews.count()
+
+            return round(sum_reviews / reviews_count, 1)
+        
+        return None
+
     def validate_release_date(self, value):
-        if value.year <1990:
+        if value.year <1900:
             raise serializers.ValidationError(
                 'The date of release didnt to be previous at 1990'
                 )
@@ -20,4 +36,6 @@ class MovieModelSerializer(serializers.ModelSerializer):
                 'The resume must not to be longer then 200 characters'
             )
         return value
+
+
         
