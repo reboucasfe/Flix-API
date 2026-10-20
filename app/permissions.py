@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class GlobalDefaultPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
@@ -10,7 +11,7 @@ class GlobalDefaultPermission(permissions.BasePermission):
 
         if not model_permission_codename:
             return False
-       
+
         return request.user.has_perm(model_permission_codename)
 
     def __get_model_permission_codename(self, method, view):
@@ -19,7 +20,7 @@ class GlobalDefaultPermission(permissions.BasePermission):
         action = self.__get_action_sufix(method)
         return f'{app_label}.{action}_{model_name}'
 
-    def __get_action_sufix(self,method):
+    def __get_action_sufix(self, method):
         method_actions = {
             'GET': 'view',
             'POST': 'add',

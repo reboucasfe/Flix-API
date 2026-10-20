@@ -12,17 +12,17 @@ class MovieListCreateView(generics.ListCreateAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieModelSerializer
 
-class MovieRetrieverUpdateDestroyView(
-    generics.RetrieveUpdateDestroyAPIView
-    ):
+
+class MovieRetrieverUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Movie.objects.all()
     serializer_class = MovieModelSerializer
 
+
 class MovieStatsView(views.APIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Movie.objects.all()
-   
+
     def get(self, request):
         total_movies = self.queryset.count()
         movies_by_genres = self.queryset.values(
@@ -35,10 +35,5 @@ class MovieStatsView(views.APIView):
             'total_movies': total_movies,
             'movies_by_genre': movies_by_genres,
             'total_reviews': total_reviews,
-            'avrage_stars': round(average_stars,1) if average_stars else 0,
-            }, status=status.HTTP_200_OK)
-
-
-    
-
-
+            'avrage_stars': round(average_stars, 1) if average_stars else 0,
+        }, status=status.HTTP_200_OK)

@@ -10,9 +10,8 @@ class ReviewListCreateView(generics.ListCreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
-class ReviewRetieverUpdateDestroyView(
-    generics.RetrieveUpdateDestroyAPIView
-    ):
+
+class ReviewRetieverUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
